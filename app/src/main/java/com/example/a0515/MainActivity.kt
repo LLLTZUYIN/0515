@@ -32,24 +32,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-@Composable
-fun PointerEvents() {
-    var msg by remember { mutableStateOf("") }
-    Column {
-        Text(msg)
-        Box(
-            Modifier
-                .fillMaxSize()
-                .background(Color.Yellow)
-                .pointerInput(Unit) {
-                    awaitPointerEventScope {
-                        while (true) {
-                            val event = awaitPointerEvent()
-                            msg = "${event.type}, ${event.changes.first().position}"
-                        }
-                    }
-                }
-        )
-    }
-}
