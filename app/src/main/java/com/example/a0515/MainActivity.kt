@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/*@Composable
+@Composable
 fun PointerEvents() {
     var msg by remember { mutableStateOf("")}
     Column {
@@ -68,7 +68,6 @@ fun PointerEvents() {
         )
     }
 }
-*/
 
 @Composable
 fun Tap() {
