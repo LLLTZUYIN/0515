@@ -5,11 +5,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -24,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import com.example.a0515.ui.theme._0515Theme
 
 class MainActivity : ComponentActivity() {
@@ -36,13 +41,14 @@ class MainActivity : ComponentActivity() {
                     //Greeting("Android")
                     //PointerEvents()
                     Tap()
+                    Drag_Horizontal()
                 }
             }
         }
     }
 }
 
-@Composable
+/*@Composable
 fun PointerEvents() {
     var msg by remember { mutableStateOf("")}
     Column {
@@ -62,7 +68,7 @@ fun PointerEvents() {
         )
     }
 }
-
+*/
 
 @Composable
 fun Tap() {
@@ -108,4 +114,19 @@ fun Tap() {
                 }
         )
     }
+}
+@Composable
+fun Drag_Horizontal() {
+    var offsetX by remember { mutableStateOf(0f) }
+    Text(
+        text = "水平拖曳",
+        modifier = Modifier
+            .offset { IntOffset(offsetX.toInt(), 80) }
+            .draggable(
+                orientation= Orientation.Horizontal,
+                state = rememberDraggableState{ delta ->
+                    offsetX += delta
+                }
+            )
+    )
 }
